@@ -36,7 +36,7 @@ pipeline {
   
     stage('integrating testing') {
       steps {
-        sh 'sleep 5s'
+        sh 'sleep 15s'
         sh 'curl -v --fail --request GET \'http://192.168.192.131:8081/hello\''
       }
     }

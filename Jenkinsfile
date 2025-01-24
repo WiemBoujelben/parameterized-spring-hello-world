@@ -1,11 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Clone Repository') {
-      steps {
-        git(branch: 'main', url: 'https://github.com/WiemBoujelben/spring-boot-hello-world.git')
-      }
-    }
+
 
     stage('Build') {
       steps {
@@ -21,11 +17,26 @@ pipeline {
       }
     }
 
-    stage('Deploy') {
+  stage('contenerization') {
+        steps {
+          sh 'echo docker build image'
+          sh'echo docker tag image'
+          sh'echo docker push image'
+          
+        }
+      }
+
+
+
+    stage('Kubernetes Deployment') {
       steps {
-        sh 'nohup mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8081 &'
-        sleep(time: 30, unit: 'SECONDS')
-        sh 'curl --fail --request GET \'http://192.168.192.131:8081/hello\''
+        sh 'echo deploy to kubernetes using argoCD'
+      }
+    }
+    stage('integrating testing') {
+      steps {
+        sh 'sleep 10s'
+        sh 'testing using cURL commands z'
       }
     }
 

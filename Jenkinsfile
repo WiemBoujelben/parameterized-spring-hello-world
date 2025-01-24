@@ -38,7 +38,7 @@ pipeline {
     stage('integrating testing') {
       steps {
         sh "sleep ${params.SLEEP_TIME}"
-        sh "curl -v --fail --request GET \'http://192.168.192.131:${params.APP_PORT}/hello"
+        sh "curl -v --fail --request GET \'http://192.168.192.131:${params.APP_PORT}/hello'"
       }
     }
 

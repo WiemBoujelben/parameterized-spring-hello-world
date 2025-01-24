@@ -3,6 +3,12 @@ pipeline {
   stages {
 
 
+    stage('Maven version') {
+      steps {
+        sh 'mvn -version'
+        
+      }
+    }
     stage('Build') {
       steps {
         sh 'mvn clean install'
@@ -17,26 +23,21 @@ pipeline {
       }
     }
 
-  stage('contenerization') {
+  stage('Local deployment ') {
         steps {
-          sh 'echo docker build image'
-          sh'echo docker tag image'
-          sh'echo docker push image'
+          sh """java -jar target/spring-boot-*.jar > /dev/null &"""
+          
           
         }
       }
 
 
 
-    stage('Kubernetes Deployment') {
-      steps {
-        sh 'echo deploy to kubernetes using argoCD'
-      }
-    }
+  
     stage('integrating testing') {
       steps {
-        sh 'sleep 10s'
-        sh 'testing using cURL commands z'
+        sh 'sleep 5s'
+        sh 'curl -s http://localhost:8081/hello'
       }
     }
 
